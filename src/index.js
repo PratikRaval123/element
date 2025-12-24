@@ -36,6 +36,43 @@ app.use((err, _req, res, _next) => {
     .json({ message: err.message || "Internal Server Error" });
 });
 
+app.get("/", (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Backend</title>
+      <style>
+        body {
+          margin: 0;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: Arial, sans-serif;
+          background: #f4f6f8;
+        }
+        .box {
+          background: #fff;
+          padding: 40px 60px;
+          border-radius: 12px;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+          text-align: center;
+        }
+        h1 { margin: 0; color: #1e293b; }
+        p { margin-top: 10px; color: #64748b; }
+      </style>
+    </head>
+    <body>
+      <div class="box">
+        <h1>Welcome to Port Backend 🚀</h1>
+        <p>Your API is running successfully</p>
+      </div>
+    </body>
+    </html>
+  `);
+});
+
 connectDB(MONGODB_URI).then(() => {
   app.listen(PORT, () => {
     console.log(`Server ready on http://localhost:${PORT}`);
